@@ -539,6 +539,10 @@ static dmExtension::Result AppInitializePush(dmExtension::AppParams* params)
 
 static dmExtension::Result UpdatePush(dmExtension::Params* params)
 {
+    if (!g_Push.m_Listener) {
+        return dmExtension::RESULT_OK;
+    }
+
     dmPush::QueueFlush(&g_Push.m_CommandQueue, dmPush::HandleCommand, 0);
     return dmExtension::RESULT_OK;
 }
